@@ -10,7 +10,7 @@ contract AcaiToken is ERC20, AccessControl {
     // price = 0.002 eth
     uint priceInWei = 2 * 10 ** 15;
 
-    event CoffeePurchased(address indexed coffeeReceiver, address indexed coffeePayer);
+    event AcaiPurchased(address indexed acaiReceiver, address indexed AcaiPayer);
 
     constructor() ERC20("AcaiToken", "ACAI") {
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
@@ -21,16 +21,16 @@ contract AcaiToken is ERC20, AccessControl {
         _mint(to, amount * priceInWei);
     }
 
-    // function buyOneAcai() public {
-    //     _burn(_msgSender(), 1);
-    //     emit CoffeePurchased(_msgSender(), _msgSender());
-    // }
+    function buyOneAcai() public {
+        _burn(_msgSender(), 1);
+        emit AcaiPurchased(_msgSender(), _msgSender());
+    }
 
-    // function buyOneAcaiFrom(address payer) public {
-    //      _spendAllowance(payer, _msgSender(), 1 * priceInWei);
-    //      _burn(_msgSender(), 1 * priceInWei);
-    //      emit CoffeePurchased(_msgSender(), payer);
-    // }
+    function buyOneAcaiFrom(address payer) public {
+         _spendAllowance(payer, _msgSender(), 1 * priceInWei);
+         _burn(_msgSender(), 1 * priceInWei);
+         emit AcaiPurchased(_msgSender(), payer);
+    }
 
 
 }
